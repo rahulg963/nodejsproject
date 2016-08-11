@@ -7,8 +7,20 @@ var days = hours * 24;
 var week = days * 7;
 var years = days * 365;
 
-function ConvertTime(t1) {
+function timeConverter(UNIX_timestamp){
+    var a = new Date(UNIX_timestamp);
+    var months = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+    var year = a.getFullYear();
+    var month = months[a.getMonth()];
+    var date = a.getDate();
+    var hour = a.getHours();
+    var min = a.getMinutes();
+    var sec = a.getSeconds();
+    var time = date + ' ' + month + ' ' + year + ' ' + hour + ':' + min + ':' + sec ;
+    return time;
+}
 
+function ConvertTime(t1) {
     var t2 = new Date().getTime();
     time_diff = t2 - t1;
     time_seconds = time_diff/1000;
@@ -52,9 +64,14 @@ function ConvertTime(t1) {
     else if(time_weeks >= 1 && time_weeks < 2){
         console.log(Math.floor(time_weeks) + " week ago")
     }
-    else if(time_weeks >= 2){
+    else if(time_weeks >= 2 && time_weeks < 5){
         console.log(Math.floor(time_weeks) + " weeks ago")
     }
+
+    else{
+        console.log("Message time was : " + timeConverter(t1));
+    }
+
 }
 
 ConvertTime(new Date().getTime());
